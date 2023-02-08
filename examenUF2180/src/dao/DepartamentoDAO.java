@@ -1,6 +1,7 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -19,7 +20,7 @@ private ConexionBD conexion;
 
 
     public ArrayList<Departamento> obtenerDepartamentos() {
-    	// Obtenemos una conexion a la base de datos.
+    	// Obtenemos una conexión a la base de datos.
 		Connection con = conexion.getConexion();
 		Statement consulta = null;
 		ResultSet resultado = null;
@@ -50,11 +51,41 @@ private ConexionBD conexion;
 				conexion.desconectar();
 			} catch (SQLException e) {
 				System.out.println("Error al liberar recursos: "+e.getMessage());
-			} catch (Exception e) {
-				
-			}
+			} 
 		}
 		return lista;
     }
 
+    public int insertarDepartamento(Departamento departamento) throws SQLException {
+    	// Obtenemos una conexión a la base de datos.
+		Connection con = conexion.getConexion();
+		PreparedStatement consulta = null;
+		int resultado=0;
+		
+		try {
+			consulta = con.prepareStatement("INSERT INTO departamentos (cod_departamento, cod_centro, tipo_dir, presupuesto, nombre) \r\n"
+					+ "VALUES (?,?,?,?,?);");
+			
+			
+			consulta.setInt(1, departamento.getCodDepartamento());
+			consulta.setInt(2, departamento.getCodCentro());
+			consulta.setString(3, departamento.getTipoDir());
+			consulta.setInt(4, departamento.getPresupuesto());
+			consulta.setString(5, departamento.getNombre());
+			resultado=consulta.executeUpdate();
+
+		} catch (SQLException e) {
+			System.out.println("Error al realizar la inserción del departamento: "
+		        +e.getMessage());
+			throw e;
+		} finally {
+			try {
+				consulta.close();
+				conexion.desconectar();
+			} catch (SQLException e) {
+				System.out.println("Error al liberar recursos: "+e.getMessage());
+			} 
+		}
+		return resultado;
+    }
 }

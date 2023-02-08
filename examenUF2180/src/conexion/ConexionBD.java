@@ -23,7 +23,7 @@ public class ConexionBD {
 	 */
 	private static final String database = "empresa";
 	private static final String usuario = "sergio";
-	private static final String contrasena = "1111";
+	private static final String contrasena = "1234";
 	private static final String url="jdbc:mysql://localhost/"+database;
 	
 	private Connection conexion=null;

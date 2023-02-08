@@ -28,18 +28,18 @@ public class VentanaMostrarDepartamentos extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VentanaMostrarDepartamentos frame = new VentanaMostrarDepartamentos();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					VentanaMostrarDepartamentos frame = new VentanaMostrarDepartamentos();
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the frame.
@@ -65,7 +65,7 @@ public class VentanaMostrarDepartamentos extends JFrame {
 			new Object[][] {
 			},
 			new String[] {
-				"C\u00F3digo Depto.", "C\u00F3digo Centro", "Tipo Dir.", "Presupuesto", "Nombre"
+				"C\u00F3digo Depto.", "C\u00F3digo Centro", "Tipo Direcci\u00F3n", "Presupuesto", "Nombre"
 			}
 		) {
 			Class[] columnTypes = new Class[] {
@@ -74,7 +74,14 @@ public class VentanaMostrarDepartamentos extends JFrame {
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
 			}
+			boolean[] columnEditables = new boolean[] {
+				false, false, false, false, false
+			};
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
 		});
+		table.getColumnModel().getColumn(2).setPreferredWidth(82);
 		table.getColumnModel().getColumn(4).setPreferredWidth(228);
 		scrollPane.setViewportView(table);
 		

@@ -77,6 +77,11 @@ public class VentanaPpal extends JFrame {
 		btnNewButton_2.setIcon(new ImageIcon(VentanaPpal.class.getResource("/images/tabla32.png")));
 		
 		JButton btnNewButton_3 = new JButton("Nuevo Departamento ");
+		btnNewButton_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				controlador.mostrarInsertarDepartamentos();
+			}
+		});
 		btnNewButton_3.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		panel_1.add(btnNewButton_3, "cell 0 2,growy");
 		btnNewButton_3.setIcon(new ImageIcon(VentanaPpal.class.getResource("/images/a\u00F1adir32.png")));

@@ -3,6 +3,7 @@
  */
 package controlador;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
@@ -12,6 +13,7 @@ import dao.DepartamentoDAO;
 import modelo.Centro;
 import modelo.Departamento;
 import vista.DialogoAnadirCentro;
+import vista.DialogoAnadirDepartamento;
 import vista.VentanaMostrarCentros;
 import vista.VentanaPpal;
 import vista.VentanaMostrarDepartamentos;
@@ -31,6 +33,7 @@ public class Controlador {
 	private CentroDAO centroDAO;
 	private DepartamentoDAO departamentoDAO;
 	private VentanaMostrarDepartamentos ventanaMostrarDepartamentos;
+	private DialogoAnadirDepartamento dialogoAnadirDepartamento;
 
 	
 	
@@ -40,12 +43,14 @@ public class Controlador {
 		ventanaMostrarCentros = new VentanaMostrarCentros();
 		dialogoAnadirCentro = new DialogoAnadirCentro();
 		ventanaMostrarDepartamentos = new VentanaMostrarDepartamentos();
+		dialogoAnadirDepartamento= new DialogoAnadirDepartamento();
 		
 		// Dando acceso al controlador desde las vistas
 		ventanaPpal.setControlador(this);
 		ventanaMostrarCentros.setControlador(this);
 		dialogoAnadirCentro.setControlador(this);
 		ventanaMostrarDepartamentos.setControlador(this);
+		dialogoAnadirDepartamento.setControlador(this);
 
 		
 		// Creamos los objetos DAO
@@ -91,5 +96,26 @@ public class Controlador {
 		ArrayList<Departamento> lista= departamentoDAO.obtenerDepartamentos();
 		ventanaMostrarDepartamentos.setListaDepartamentos(lista);
 		ventanaMostrarDepartamentos.setVisible(true);
+	}
+
+
+	public void insertaDepartamento(Departamento d) {
+		
+		try {
+			departamentoDAO.insertarDepartamento(d);
+			
+			JOptionPane.showMessageDialog(dialogoAnadirCentro, "Insercion del departamento correcta");
+			dialogoAnadirDepartamento.setVisible(false);
+	
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(dialogoAnadirDepartamento, "No se ha podido insertar el departamento", "Error", JOptionPane.ERROR_MESSAGE);
+		}
+		
+		
+	}
+
+
+	public void mostrarInsertarDepartamentos() {
+		dialogoAnadirDepartamento.setVisible(true);
 	}
 }
