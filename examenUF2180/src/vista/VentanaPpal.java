@@ -67,6 +67,11 @@ public class VentanaPpal extends JFrame {
 		panel_1.setLayout(new MigLayout("", "[]", "[::100px,grow][36.00,grow][::100px,grow]"));
 		
 		JButton btnNewButton_2 = new JButton("Ver Departamentos");
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				controlador.mostrarListaDepartamentos();
+			}
+		});
 		btnNewButton_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		panel_1.add(btnNewButton_2, "cell 0 0,grow");
 		btnNewButton_2.setIcon(new ImageIcon(VentanaPpal.class.getResource("/images/tabla32.png")));

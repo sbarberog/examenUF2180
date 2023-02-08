@@ -8,10 +8,13 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 import dao.CentroDAO;
+import dao.DepartamentoDAO;
 import modelo.Centro;
+import modelo.Departamento;
 import vista.DialogoAnadirCentro;
 import vista.VentanaMostrarCentros;
 import vista.VentanaPpal;
+import vista.VentanaMostrarDepartamentos;
 
 /**
  * @author David
@@ -26,6 +29,8 @@ public class Controlador {
 	
 	// Objetos DAO o CRUD de la base de datos
 	private CentroDAO centroDAO;
+	private DepartamentoDAO departamentoDAO;
+	private VentanaMostrarDepartamentos ventanaMostrarDepartamentos;
 
 	
 	
@@ -34,15 +39,18 @@ public class Controlador {
 		ventanaPpal = new VentanaPpal();
 		ventanaMostrarCentros = new VentanaMostrarCentros();
 		dialogoAnadirCentro = new DialogoAnadirCentro();
+		ventanaMostrarDepartamentos = new VentanaMostrarDepartamentos();
 		
 		// Dando acceso al controlador desde las vistas
 		ventanaPpal.setControlador(this);
 		ventanaMostrarCentros.setControlador(this);
 		dialogoAnadirCentro.setControlador(this);
+		ventanaMostrarDepartamentos.setControlador(this);
 
 		
 		// Creamos los objetos DAO
 		centroDAO = new CentroDAO();
+		departamentoDAO=new DepartamentoDAO();
 	}
 	
 	
@@ -79,5 +87,9 @@ public class Controlador {
 		}
 	}
 	
-	
+	public void mostrarListaDepartamentos() {
+		ArrayList<Departamento> lista= departamentoDAO.obtenerDepartamentos();
+		ventanaMostrarDepartamentos.setListaDepartamentos(lista);
+		ventanaMostrarDepartamentos.setVisible(true);
+	}
 }
