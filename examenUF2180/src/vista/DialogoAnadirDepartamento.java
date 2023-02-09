@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JSpinner;
 import javax.swing.JRadioButton;
@@ -151,15 +152,20 @@ public class DialogoAnadirDepartamento extends JDialog {
 	}
 
 	protected void recogerDatos() {
-		Departamento d = new Departamento();
-		d.setCodDepartamento(Integer.parseInt(txtCodDepto.getText()));
-		d.setCodCentro(Integer.parseInt(txtCodCentro.getText()));
-		d.setTipoDir(grupoTipoDir.getSelection().getActionCommand());
-		d.setPresupuesto((int) spinner.getValue());
-		d.setNombre(txtNombre.getText());
-
-		controlador.insertaDepartamento(d);
-		
+		try {
+			Departamento d = new Departamento();
+			d.setCodDepartamento(Integer.parseInt(txtCodDepto.getText()));
+			d.setCodCentro(Integer.parseInt(txtCodCentro.getText()));
+			d.setTipoDir(grupoTipoDir.getSelection().getActionCommand());
+			d.setPresupuesto((int) spinner.getValue());
+			d.setNombre(txtNombre.getText());
+	
+			controlador.insertaDepartamento(d);
+		}catch(NumberFormatException e) {
+			JOptionPane.showMessageDialog(contentPanel, e, "Debe introducir un número correcto", JOptionPane.ERROR_MESSAGE);
+		}catch(NullPointerException e){
+			JOptionPane.showMessageDialog(contentPanel, e, "Debe rellenar todos los campos", JOptionPane.ERROR_MESSAGE);
+		}
 	}
 
 	public void setControlador(Controlador controlador) {
