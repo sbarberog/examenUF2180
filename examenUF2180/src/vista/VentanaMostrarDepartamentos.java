@@ -74,12 +74,6 @@ public class VentanaMostrarDepartamentos extends JFrame {
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
 			}
-			boolean[] columnEditables = new boolean[] {
-				false, false, false, false, false
-			};
-			public boolean isCellEditable(int row, int column) {
-				return columnEditables[column];
-			}
 		});
 		table.getColumnModel().getColumn(2).setPreferredWidth(82);
 		table.getColumnModel().getColumn(4).setPreferredWidth(228);
@@ -107,8 +101,8 @@ public class VentanaMostrarDepartamentos extends JFrame {
 		modelo.setRowCount(0);
 		for (Departamento departamento : lista) {
 			Object fila [] = {
-					departamento.getCodDepartamento(),departamento.getCodCentro(),departamento.getTipoDir(),
-					departamento.getPresupuesto(),departamento.getNombre()
+					departamento.getCodDepartamento(),departamento.getCodCentro(),departamento.getTipoDirTxt(),
+					departamento.getPresupuesto()*1000,departamento.getNombre()
 			};
 			modelo.addRow(fila);
 		}

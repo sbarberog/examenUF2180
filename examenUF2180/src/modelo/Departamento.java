@@ -46,6 +46,13 @@ public class Departamento {
 	public String getTipoDir() {
 		return tipoDir;
 	}
+	
+	public String getTipoDirTxt() {
+		if(this.tipoDir.equals("P"))
+			return "En propiedad";
+		else 
+			return "En funciones";
+	}
 
 	public void setTipoDir(String tipoDir) {
 		this.tipoDir = tipoDir;

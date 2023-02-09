@@ -63,7 +63,8 @@ private ConexionBD conexion;
 		int resultado=0;
 		
 		try {
-			consulta = con.prepareStatement("INSERT INTO departamentos (cod_departamento, cod_centro, tipo_dir, presupuesto, nombre) \r\n"
+			consulta = con.prepareStatement("INSERT INTO departamentos "
+					+ "(cod_departamento, cod_centro, tipo_dir, presupuesto, nombre) \r\n"
 					+ "VALUES (?,?,?,?,?);");
 			
 			

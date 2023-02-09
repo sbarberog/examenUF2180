@@ -99,23 +99,27 @@ public class Controlador {
 	}
 
 
-	public void insertaDepartamento(Departamento d) {
+	public void insertaDepartamento(Departamento d) throws SQLException {
 		
-		try {
-			departamentoDAO.insertarDepartamento(d);
+//		try {
 			
-			JOptionPane.showMessageDialog(dialogoAnadirCentro, "Insercion del departamento correcta");
-			dialogoAnadirDepartamento.setVisible(false);
-	
-		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(dialogoAnadirDepartamento, "No se ha podido insertar el departamento", "Error", JOptionPane.ERROR_MESSAGE);
-		}
+			departamentoDAO.insertarDepartamento(d);
+//			
+//			JOptionPane.showMessageDialog(dialogoAnadirDepartamento, "Insercion del departamento correcta");
+//			dialogoAnadirDepartamento.setVisible(false);
+//	
+//		} catch (SQLException e) {
+//			JOptionPane.showMessageDialog(dialogoAnadirDepartamento, "No se ha podido insertar el departamento", "Error", JOptionPane.ERROR_MESSAGE);
+//		}
 		
 		
 	}
 
 
 	public void mostrarInsertarDepartamentos() {
+		
+		ArrayList<Centro> lista = centroDAO.obtenerCentros();
+		dialogoAnadirDepartamento.setListaCentros(lista);
 		dialogoAnadirDepartamento.setVisible(true);
 	}
 }
